@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAMEREWARD HUB - Earn & Redeem Codes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #06060b;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --neon-pink: #ff2d95;
+      --neon-cyan: #00d1ff;
+      --neon-violet: #8b5cff;
+      --neon-lime: #7effa3;
+      --text-main: #f0f4f8;
+      --text-muted: rgba(255, 255, 255, 0.5);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Rajdhani', sans-serif; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 45, 149, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 209, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 255, 0.08) 0%, transparent 60%);
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 20px 16px 20px;
+      background: rgba(6, 6, 11, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .brand-group {
+      display: flex; flex-direction: column;
+    }
+    .brand-sub {
+      font-size: 10px; font-weight: 700; color: var(--neon-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem; font-weight: 900;
+      font-style: italic; letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    .brand span {
+      color: var(--neon-pink);
+    }
+    .user-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 9999px;
+      padding: 6px 16px 6px 8px;
+      backdrop-filter: blur(12px);
+    }
+    .avatar-circle {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-violet), var(--neon-cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: #fff;
+    }
+    .balance-info {
+      display: flex; flex-direction: column;
+    }
+    .balance-label {
+      font-size: 9px; text-transform: uppercase; opacity: 0.5; font-weight: 700; line-height: 1;
+    }
+    .coin-val {
+      font-size: 12px; font-weight: 700; color: var(--neon-lime);
+    }
+    .container { padding: 20px 20px 100px 20px; max-width: 600px; margin: 0 auto; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin: 20px 0 12px 0;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: rgba(255, 255, 255, 0.7);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .glow-dot-cyan {
+      width: 6px; height: 6px; border-radius: 50%; background-color: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+    .glow-dot-pink {
+      width: 6px; height: 6px; border-radius: 50%; background-color: var(--neon-pink);
+      box-shadow: 0 0 8px var(--neon-pink);
+    }
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 14px 16px; margin-bottom: 12px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative; overflow: hidden;
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 209, 255, 0.3);
+      transform: scale(0.99);
+    }
+    .task-item {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .task-info { display: flex; align-items: center; gap: 14px; }
+    .task-icon {
+      width: 48px; height: 48px; border-radius: 16px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .task-title { font-weight: 700; font-size: 1rem; }
+    .task-desc { font-size: 0.8rem; color: var(--text-muted); }
+    .reward-pill {
+      background: rgba(126, 255, 163, 0.1);
+      border: 1px solid rgba(126, 255, 163, 0.3);
+      color: var(--neon-lime);
+      padding: 6px 14px; border-radius: 10px;
+      font-weight: 700; font-size: 0.85rem;
+      cursor: pointer; text-align: center; transition: all 0.2s ease;
+    }
+    .reward-pill:hover {
+      background: rgba(126, 255, 163, 0.25);
+    }
+    .flash-card {
+      background: linear-gradient(135deg, #1a1a2e, #06060b);
+      border: 1px solid rgba(255, 45, 149, 0.3);
+      border-radius: 24px; padding: 20px;
+      position: relative; overflow: hidden;
+    }
+    .flash-glow {
+      position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px; background: rgba(255, 45, 149, 0.12);
+      filter: blur(40px); border-radius: 50%; pointer-events: none;
+    }
+    .btn-redeem {
+      background: var(--neon-pink);
+      color: #fff; border: none; border-radius: 12px;
+      padding: 10px 20px; font-weight: 900; font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem; cursor: pointer; text-transform: uppercase;
+      letter-spacing: -0.02em;
+      box-shadow: 0 0 15px rgba(255, 45, 149, 0.4);
+      transition: transform 0.15s ease;
+    }
+    .btn-redeem:active {
+      transform: scale(0.95);
+    }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex; justify-content: space-around;
+      padding: 12px 0; z-index: 1000;
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center;
+      color: rgba(255, 255, 255, 0.4); font-size: 0.65rem; text-decoration: none;
+      gap: 3px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em;
+    }
+    .nav-item.active {
+      color: var(--neon-cyan);
+    }
+    .active-dot {
+      width: 6px; height: 6px; border-radius: 50%; background-color: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan); margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header" style="flex-direction: column; gap: 12px; align-items: stretch;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="brand-group">
+        <span class="brand-sub">Central Hub</span>
+        <div class="brand">GAMEREWARD <span>HUB</span></div>
+      </div>
+      <div class="user-badge">
+        <div class="avatar-circle">AV</div>
+        <span style="font-size: 11px; font-weight: 700; color: #fff;">Alex Vance</span>
+      </div>
+    </div>
+
+    <!-- DUAL COIN BALANCE CARDS -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div style="background: rgba(0, 209, 255, 0.1); border: 1px solid rgba(0, 209, 255, 0.3); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 18px;">🪙</span>
+        <div>
+          <div style="font-size: 8px; font-weight: 800; color: var(--neon-cyan); letter-spacing: 0.05em;">AVAILABLE COINS</div>
+          <div style="font-size: 13px; font-weight: 900; color: var(--neon-lime);">🪙 <span id="userCoins">1,250</span></div>
+        </div>
+      </div>
+      <div style="background: rgba(255, 45, 149, 0.1); border: 1px solid rgba(255, 45, 149, 0.3); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 18px;">🪙</span>
+        <div>
+          <div style="font-size: 8px; font-weight: 800; color: var(--neon-pink); letter-spacing: 0.05em;">WITHDRAWAL BAL</div>
+          <div style="font-size: 13px; font-weight: 900; color: #ffb703;">🪙 <span id="withdrawalCoins">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="glow-dot-cyan"></span>
+        Elite Missions
+      </div>
+      <span style="font-size: 10px; font-weight: 700; color: var(--neon-cyan); cursor: pointer;">View All</span>
+    </div>
+    
+    <div class="glass-card task-item">
+      <div class="task-info">
+        <div class="task-icon">🎮</div>
+        <div>
+          <div class="task-title">WinZO Games</div>
+          <div class="task-desc">Install & play 1 match</div>
+        </div>
+      </div>
+      <div class="reward-pill" onclick="startTask('WinZO Games', 950)">+950</div>
+    </div>
+
+    <div class="glass-card task-item">
+      <div class="task-info">
+        <div class="task-icon">📱</div>
+        <div>
+          <div class="task-title">Moj App</div>
+          <div class="task-desc">Download & watch 3 videos</div>
+        </div>
+      </div>
+      <div class="reward-pill" onclick="startTask('Moj App', 800)">+800</div>
+    </div>
+
+    <div class="glass-card task-item">
+      <div class="task-info">
+        <div class="task-icon">🏃</div>
+        <div>
+          <div class="task-title">Temple Run 2</div>
+          <div class="task-desc">Reach 50,000 score</div>
+        </div>
+      </div>
+      <div class="reward-pill" onclick="startTask('Temple Run 2', 600)">+600</div>
+    </div>
+
+    <div class="section-header" style="margin-top: 24px;">
+      <div class="section-title">
+        <span class="glow-dot-pink"></span>
+        Flash Redemption & Custom Vault
+      </div>
+    </div>
+
+    <!-- Custom Redeem Amount Card -->
+    <div class="flash-card" style="margin-bottom: 16px; border-color: rgba(0, 209, 255, 0.4);">
+      <div class="flash-glow" style="background: rgba(0, 209, 255, 0.15);"></div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <div>
+          <span style="font-size: 10px; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 1px;">Custom Vault Redeem</span>
+          <div style="font-size: 1rem; font-weight: 700; color: #fff;">Custom Voucher / Paytm Cash</div>
+        </div>
+        <div style="font-size: 1.5rem;">⚡</div>
+      </div>
+      
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 4px;">Enter Amount (₹)</label>
+        <input type="number" id="customAmountInput" value="10" min="1" oninput="updateCustomCoinsRequirement()" style="width: 100%; background: rgba(0, 209, 255, 0.08); border: 1px solid rgba(0, 209, 255, 0.3); border-radius: 8px; padding: 10px; color: #fff; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none;">
+      </div>
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+        <div>
+          <div style="font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 700;">Required Coins (1 ₹ = 100 Coins)</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: var(--neon-lime);" id="customRequiredCoins">🪙 1,000 Coins</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--neon-pink); margin-top: 2px; display: none;" id="customWarningText">⚠️ Insufficient Balance</div>
+        </div>
+        <button class="btn-redeem" id="customRedeemBtn" style="background: var(--neon-pink); color: #fff;" onclick="redeemCustom()">Redeem Now</button>
+      </div>
+    </div>
+
+    <div class="flash-card" style="margin-bottom: 12px;">
+      <div class="flash-glow"></div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <span style="font-size: 10px; font-weight: 700; color: var(--neon-pink); text-transform: uppercase;">Store Special</span>
+          <div style="font-size: 1rem; font-weight: 700; color: #fff;">Google Play Code</div>
+          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); font-style: italic;">Value: ₹10.00</div>
+        </div>
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05); font-size: 1.2rem;">🎁</div>
+      </div>
+      <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+        <div>
+          <div style="font-size: 10px; text-transform: uppercase; color: rgba(255,255,255,0.4);">Requirement</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--neon-lime);">1,000 Coins</div>
+        </div>
+        <button class="btn-redeem" onclick="redeem('Google Play Code ₹10', 1000)">Redeem Now</button>
+      </div>
+    </div>
+
+    <div class="flash-card" style="margin-bottom: 12px; border-color: rgba(0, 209, 255, 0.3);">
+      <div class="flash-glow" style="background: rgba(0, 209, 255, 0.12);"></div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <span style="font-size: 10px; font-weight: 700; color: var(--neon-cyan); text-transform: uppercase;">Direct Top-Up</span>
+          <div style="font-size: 1rem; font-weight: 700; color: #fff;">Free Fire 110 Diamonds</div>
+          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); font-style: italic;">Player ID Instant Credit</div>
+        </div>
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05); font-size: 1.2rem;">🔥</div>
+      </div>
+      <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+        <div>
+          <div style="font-size: 10px; text-transform: uppercase; color: rgba(255,255,255,0.4);">Requirement</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--neon-lime);">1,000 Coins</div>
+        </div>
+        <button class="btn-redeem" style="background: var(--neon-cyan); color: #000; box-shadow: 0 0 15px rgba(0, 209, 255, 0.4);" onclick="redeem('Free Fire 110 Diamonds', 1000)">Redeem Now</button>
+      </div>
+    </div>
+
+    <div class="flash-card" style="margin-bottom: 12px; border-color: rgba(126, 255, 163, 0.3);">
+      <div class="flash-glow" style="background: rgba(126, 255, 163, 0.12);"></div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <span style="font-size: 10px; font-weight: 700; color: var(--neon-lime); text-transform: uppercase;">Game Pass</span>
+          <div style="font-size: 1rem; font-weight: 700; color: #fff;">BGMI 60 UC</div>
+          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); font-style: italic;">Character ID Delivery</div>
+        </div>
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05); font-size: 1.2rem;">🔫</div>
+      </div>
+      <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+        <div>
+          <div style="font-size: 10px; text-transform: uppercase; color: rgba(255,255,255,0.4);">Requirement</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--neon-lime);">1,000 Coins</div>
+        </div>
+        <button class="btn-redeem" style="background: var(--neon-lime); color: #000; box-shadow: 0 0 15px rgba(126, 255, 163, 0.4);" onclick="redeem('BGMI 60 UC', 1000)">Redeem Now</button>
+      </div>
+    </div>
+
+    <!-- TERMS & CONDITIONS CARD -->
+    <div class="glass-card" style="border-color: rgba(0, 209, 255, 0.3); margin-top: 16px;">
+      <div style="font-size: 0.9rem; font-weight: 700; color: var(--neon-cyan); margin-bottom: 4px;">📜 TERMS, PRIVACY & WITHDRAWAL POLICY</div>
+      <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 12px;">Review app usage rules, fair play guidelines, privacy terms, and the monthly 20th withdrawal payout schedule.</div>
+      <button class="btn-redeem" style="background: rgba(0, 209, 255, 0.15); color: var(--neon-cyan); width: 100%; box-shadow: none; border: 1px solid var(--neon-cyan); font-size: 0.75rem;" onclick="alert('📜 GAMEREWARD HUB POLICY:\n\n1. MONTHLY WITHDRAWAL POLICY: Coins earned from active gaming tasks unlock for withdrawal on the 20th of every month.\n\n2. FAIR PLAY RULES: Multi-accounting, VPNs, and emulators are strictly forbidden.\n\n3. S2S POSTBACKS: Completed offerwall tasks are verified automatically via secure server postbacks.\n\n4. PRIVACY: Your profile & Firebase UID are encrypted.')">📋 View Terms & Conditions</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active">
+      <div class="active-dot"></div>
+      <span style="font-size: 16px; margin-bottom: 2px;">🎯</span>
+      <span>Tasks</span>
+    </div>
+    <div class="nav-item">
+      <span style="font-size: 16px; margin-bottom: 2px;">📊</span>
+      <span>Stats</span>
+    </div>
+    <div class="nav-item">
+      <span style="font-size: 16px; margin-bottom: 2px;">💳</span>
+      <span>Vault</span>
+    </div>
+    <div class="nav-item">
+      <span style="font-size: 16px; margin-bottom: 2px;">👤</span>
+      <span>Admin</span>
+    </div>
+  </div>
+
+  <script>
+    let coins = 1250;
+    let withdrawalCoins = 0;
+
+    function unlockSalary() {
+      const today = new Date().getDate();
+      if (today < 20) {
+        alert(`🔒 Salary payout unlocks on the 20th of every month!\n\nCurrent Date: Day ${today}\nNext Salary Payout: 20th of this month.`);
+        return;
+      }
+      if (coins <= 0) {
+        alert(`ℹ️ No Available Coins to transfer to Withdrawal Balance.`);
+        return;
+      }
+      const transferred = coins;
+      withdrawalCoins += transferred;
+      coins = 0;
+      document.getElementById('userCoins').innerText = coins.toLocaleString();
+      document.getElementById('withdrawalCoins').innerText = withdrawalCoins.toLocaleString();
+      updateCustomCoinsRequirement();
+      alert(`🎉 Monthly Salary Unlocked!\n+${transferred.toLocaleString()} Coins transferred to Withdrawal Balance!`);
+    }
+
+    function updateCustomCoinsRequirement() {
+      const val = parseInt(document.getElementById('customAmountInput').value) || 0;
+      const required = val * 100;
+      const reqEl = document.getElementById('customRequiredCoins');
+      const warnEl = document.getElementById('customWarningText');
+      const btnEl = document.getElementById('customRedeemBtn');
+
+      reqEl.innerText = `🪙 ${required.toLocaleString()} Withdrawal Coins`;
+
+      if (val > 0 && withdrawalCoins < required) {
+        reqEl.style.color = 'var(--neon-pink)';
+        warnEl.style.display = 'block';
+        warnEl.innerText = `⚠️ Insufficient Withdrawal Balance (Short by ${(required - withdrawalCoins).toLocaleString()} Withdrawal Coins - Payout on 20th)`;
+        btnEl.disabled = true;
+        btnEl.style.opacity = '0.5';
+        btnEl.style.cursor = 'not-allowed';
+      } else {
+        reqEl.style.color = 'var(--neon-lime)';
+        warnEl.style.display = 'none';
+        btnEl.disabled = false;
+        btnEl.style.opacity = '1';
+        btnEl.style.cursor = 'pointer';
+      }
+    }
+
+    function redeemCustom() {
+      const val = parseInt(document.getElementById('customAmountInput').value) || 0;
+      if (val <= 0) {
+        alert("Please enter a valid Rupee amount!");
+        return;
+      }
+      const cost = val * 100;
+      if (withdrawalCoins < cost) {
+        alert(`Insufficient Withdrawal Balance! You need ${cost} unlocked coins (Payout on 20th).`);
+        return;
+      }
+      withdrawalCoins -= cost;
+      document.getElementById('withdrawalCoins').innerText = withdrawalCoins.toLocaleString();
+      updateCustomCoinsRequirement();
+      alert(`⏳ Custom ₹${val} Redemption Request Submitted!\nStatus: PENDING\n-${cost} Withdrawal Coins deducted. Saved in database.`);
+    }
+
+    function startTask(name, reward) {
+      alert(`Opening ${name} offerwall task... Complete task to earn ${reward} coins!`);
+      setTimeout(() => {
+        coins += reward;
+        document.getElementById('userCoins').innerText = coins.toLocaleString();
+        alert(`🎉 Postback Success! ${reward} Available Coins credited for ${name}!`);
+      }, 1500);
+    }
+
+    function redeem(item, cost) {
+      if (withdrawalCoins < cost) {
+        alert(`Insufficient Withdrawal Balance! You need ${cost} unlocked coins to redeem ${item} (Payout on 20th).`);
+        return;
+      }
+      withdrawalCoins -= cost;
+      document.getElementById('withdrawalCoins').innerText = withdrawalCoins.toLocaleString();
+      const code = 'GRH-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+      alert(`✅ Redemption Successful!\nYour ${item} Code:\n\n${code}\n\nTransaction logged!`);
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,6 @@
+{
+  "name": "GameReward Hub",
+  "description": "Cyberpunk Reward Hub app: earn coins by completing high paying task offerwalls, redeem Google Play codes, BGMI UC, Free Fire diamonds, and track transactions in real-time.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

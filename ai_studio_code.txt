@@ -1,0 +1,23 @@
+# ==============================================================================
+# GameReward Hub - Environment Configuration Template
+# Copy this file to '.env' and populate with your actual credentials.
+# NEVER commit the actual '.env' file containing real secrets to version control.
+# ==============================================================================
+
+# Google OAuth 2.0 Web Client ID (from Google Cloud Console / Firebase Console)
+GOOGLE_OAUTH_CLIENT_ID="724013306057-web.apps.googleusercontent.com"
+GOOGLE_OAUTH_CLIENT_SECRET="your_google_oauth_client_secret_here"
+
+# Firebase Cloud Configuration
+FIREBASE_API_KEY="AIzaSyCIit-56cDC8frK0M5ZGV7L8TJjQo2Xp8E"
+FIREBASE_PROJECT_ID="jenra-806a6"
+FIREBASE_AUTH_DOMAIN="jenra-806a6.firebaseapp.com"
+FIREBASE_STORAGE_BUCKET="jenra-806a6.firebasestorage.app"
+FIREBASE_MESSAGING_SENDER_ID="724013306057"
+FIREBASE_ANDROID_APP_ID="1:724013306057:android:c0a8c560cc2d4e7614fd18"
+FIREBASE_WEB_APP_ID="1:724013306057:web:c0a8c560cc2d4e7614fd18"
+
+# Backend & Postback API Endpoints
+API_BASE_URL="https://api.gamerewardhub.com/v1"
+OFFERWALL_API_KEY="your_offerwall_production_key_here"
+PAYOUT_WEBHOOK_SECRET="your_payout_webhook_secret_here"

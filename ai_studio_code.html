@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GAMEREWARD HUB</title>
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            darkSlate: '#0F172A',
+            cardBg: '#1E293B',
+            neonCyan: '#00D1FF',
+            neonPink: '#FF2D95',
+            neonGreen: '#10B981',
+          },
+          borderRadius: {
+            '2xl': '16px',
+            '3xl': '24px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .ripple:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
+    }
+  </style>
+</head>
+<body class="bg-darkSlate font-sans min-h-screen flex flex-col items-center justify-between pb-24 selection:bg-neonCyan selection:text-black">
+
+  <!-- Mobile Max Container Wrapper -->
+  <div class="w-full max-w-md min-h-screen flex flex-col justify-between px-4 pt-4 pb-2">
+
+    <!-- TOP HEADER -->
+    <header class="flex items-center justify-between py-3 mb-3 border-b border-slate-800">
+      <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-neonCyan to-neonPink flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <span class="text-xl">🎮</span>
+        </div>
+        <div>
+          <h1 class="text-lg font-black tracking-wider text-white flex items-center">
+            GAMEREWARD <span class="text-neonPink ml-1">HUB</span>
+          </h1>
+          <p class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Android M3 Rewards</p>
+        </div>
+      </div>
+
+      <!-- Coin Balance Badge -->
+      <div class="flex items-center bg-slate-800/90 border border-slate-700 rounded-full px-3.5 py-1.5 shadow-inner">
+        <span class="text-base mr-1.5 animate-bounce">🪙</span>
+        <span id="headerCoins" class="font-extrabold text-sm text-yellow-400 tracking-wide">1,250</span>
+        <span class="text-[10px] font-bold text-slate-400 ml-1">COINS</span>
+      </div>
+    </header>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed top-5 z-50 left-1/2 -translate-x-1/2 w-11/12 max-w-sm bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-2xl shadow-2xl transition-all duration-300 transform -translate-y-24 opacity-0 pointer-events-none flex items-center space-x-3">
+      <span id="toastIcon" class="text-xl">✨</span>
+      <span id="toastMessage" class="text-xs font-semibold leading-tight">Notification text</span>
+    </div>
+
+    <!-- MAIN SCROLLABLE CONTENT AREA -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar pb-6">
+
+      <!-- USER PROFILE CARD -->
+      <section class="bg-cardBg border border-slate-700/80 rounded-2xl p-4 shadow-xl mb-4 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neonCyan/10 rounded-full blur-xl pointer-events-none"></div>
+        
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3.5">
+            <!-- Profile Avatar with Online Ring -->
+            <div class="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" 
+                alt="Avatar" 
+                class="w-13 h-13 w-12 h-12 rounded-2xl object-cover border-2 border-neonCyan shadow-md"
+              />
+              <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+            </div>
+
+            <!-- User Info & Verified Badge -->
+            <div>
+              <div class="flex items-center space-x-1.5">
+                <h2 class="font-bold text-sm text-white tracking-wide">AIMedia Gamer</h2>
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/40">
+                  <svg class="w-2.5 h-2.5 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  Verified
+                </span>
+              </div>
+              <p class="text-xs text-slate-400 font-medium">aimeedia.tech@gmail.com</p>
+              <p class="text-[10px] text-slate-500 font-mono mt-0.5">UID: GRH-98214-IN</p>
+            </div>
+          </div>
+
+          <!-- Logout Button -->
+          <button onclick="handleLogout()" class="ripple flex flex-col items-center justify-center p-2 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-slate-700/60 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span class="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Exit</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 1: TASKS SCREEN -->
+      <section id="tab-tasks" class="space-y-3 transition-opacity duration-200">
+        <div class="flex items-center justify-between px-1">
+          <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wider">Available Offers</h3>
+          <span class="text-[11px] font-bold text-neonCyan bg-neonCyan/10 px-2.5 py-0.5 rounded-full border border-neonCyan/20">Instant Credit</span>
+        </div>
+
+        <!-- Task Item 1 -->
+        <div class="bg-cardBg border border-slate-700/70 rounded-2xl p-4 flex items-center justify-between shadow-md">
+          <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-xl">🏏</div>
+            <div>
+              <h4 class="font-bold text-sm text-white">Dream11 Fantasy Cricket</h4>
+              <p class="text-[11px] text-slate-400">Install & create a free contest team</p>
+              <span class="text-[10px] text-emerald-400 font-semibold mt-0.5 inline-block">⚡ 1 min completion</span>
+            </div>
+          </div>
+          <button onclick="claimTask('Dream11', 500)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+            +500 🪙
+          </button>
+        </div>
+
+        <!-- Task Item 2 -->
+        <div class="bg-cardBg border border-slate-700/70 rounded-2xl p-4 flex items-center justify-between shadow-md">
+          <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-xl">🎯</div>
+            <div>
+              <h4 class="font-bold text-sm text-white">WinZO Gold Games</h4>
+              <p class="text-[11px] text-slate-400">Download app & play 1 practice match</p>
+              <span class="text-[10px] text-emerald-400 font-semibold mt-0.5 inline-block">⚡ Verified offer</span>
+            </div>
+          </div>
+          <button onclick="claimTask('WinZO Games', 350)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+            +350 🪙
+          </button>
+        </div>
+
+        <!-- Task Item 3 -->
+        <div class="bg-cardBg border border-slate-700/70 rounded-2xl p-4 flex items-center justify-between shadow-md">
+          <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-xl">🎲</div>
+            <div>
+              <h4 class="font-bold text-sm text-white">Zupee Ludo Supreme</h4>
+              <p class="text-[11px] text-slate-400">Play 2 rounds of classic speed ludo</p>
+              <span class="text-[10px] text-emerald-400 font-semibold mt-0.5 inline-block">⚡ High payout</span>
+            </div>
+          </div>
+          <button onclick="claimTask('Zupee Ludo', 400)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+            +400 🪙
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 2: VAULT / REDEEM SECTION (CRITICAL FIX) -->
+      <section id="tab-vault" class="space-y-4 hidden transition-opacity duration-200">
+        
+        <!-- Payout Banner Card -->
+        <div class="bg-gradient-to-r from-slate-900 to-cardBg border border-slate-700 rounded-2xl p-4 relative overflow-hidden">
+          <div class="flex justify-between items-center">
+            <div>
+              <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">DIRECT PAYOUT VAULT</span>
+              <h3 class="text-base font-extrabold text-white mt-1">Instant Paytm / UPI Withdrawal</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Conversion Rate: <span class="text-yellow-400 font-bold">1 Rupee (₹) = 100 Coins</span></p>
+            </div>
+            <div class="text-3xl">💸</div>
+          </div>
+        </div>
+
+        <!-- Custom Redeem Calculator Card -->
+        <div class="bg-cardBg border border-slate-700 rounded-2xl p-5 shadow-xl space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+            <h4 class="font-bold text-sm text-slate-200">Custom Payout Calculator</h4>
+            <span class="text-[11px] text-slate-400">Min. ₹10 (1,000 Coins)</span>
+          </div>
+
+          <!-- Payout Type Selector -->
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center justify-center space-x-2 bg-slate-800/90 border border-slate-700 rounded-xl p-2.5 cursor-pointer has-[:checked]:border-neonCyan has-[:checked]:bg-cyan-500/10">
+              <input type="radio" name="payoutType" value="UPI" checked class="accent-neonCyan" />
+              <span class="text-xs font-bold text-white">UPI VPA</span>
+            </label>
+            <label class="flex items-center justify-center space-x-2 bg-slate-800/90 border border-slate-700 rounded-xl p-2.5 cursor-pointer has-[:checked]:border-neonCyan has-[:checked]:bg-cyan-500/10">
+              <input type="radio" name="payoutType" value="PAYTM" class="accent-neonCyan" />
+              <span class="text-xs font-bold text-white">Paytm Wallet</span>
+            </label>
+          </div>
+
+          <!-- Receiver Address Input -->
+          <div>
+            <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">Receiver UPI ID / Paytm Phone</label>
+            <input 
+              id="receiverInput"
+              type="text" 
+              placeholder="e.g. aimeedia@okhdfcbank or 9876543210" 
+              class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-neonCyan transition font-mono"
+              value="aimeedia.tech@paytm"
+            />
+          </div>
+
+          <!-- Rupee Amount Input (Pure Numeric Dynamic Calculation) -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="text-[11px] font-bold text-slate-400 uppercase">Withdraw Amount (in Rupees ₹)</label>
+              <span class="text-[10px] text-slate-400">Balance: <strong id="calcBalanceLabel" class="text-yellow-400">1,250</strong> Coins</span>
+            </div>
+            
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">₹</span>
+              <input 
+                id="rupeeInput"
+                type="number" 
+                min="1"
+                step="1"
+                placeholder="Enter rupees (e.g. 10)" 
+                class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-8 pr-3.5 py-2.5 text-sm text-white font-bold placeholder-slate-500 focus:outline-none focus:border-neonCyan transition"
+              />
+            </div>
+          </div>
+
+          <!-- Dynamic Calculation Breakdown Box -->
+          <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400">Calculated Coins Required:</span>
+              <span id="calculatedCoinsText" class="font-extrabold text-yellow-400 font-mono">0 Coins</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400">Net Estimated Payout:</span>
+              <span id="estimatedRupeesText" class="font-bold text-emerald-400 font-mono">₹0.00</span>
+            </div>
+            <!-- Error Feedback Box -->
+            <div id="calcErrorBox" class="hidden text-[11px] font-bold text-rose-400 bg-rose-500/10 border border-rose-500/30 rounded-lg p-2 mt-1">
+              ⚠️ Error text here
+            </div>
+          </div>
+
+          <!-- Confirm Redeem Button -->
+          <button 
+            id="redeemSubmitBtn"
+            onclick="processRedeem()" 
+            class="ripple w-full bg-gradient-to-r from-neonCyan to-blue-500 text-slate-950 font-black text-sm py-3.5 rounded-xl shadow-lg shadow-cyan-500/25 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            CONFIRM WITHDRAWAL
+          </button>
+        </div>
+
+        <!-- Pre-set Fixed Gift Cards -->
+        <div class="space-y-2 pt-2">
+          <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider px-1">Or Choose Voucher Cards</h4>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-cardBg border border-slate-700/80 rounded-2xl p-3.5 flex flex-col justify-between">
+              <div>
+                <span class="text-xl">🎁</span>
+                <h5 class="font-bold text-xs text-white mt-1">Google Play ₹10</h5>
+                <p class="text-[10px] text-slate-400">Instant Redeem Code</p>
+              </div>
+              <button onclick="redeemPreset('Google Play ₹10', 1000)" class="ripple mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-yellow-400 text-xs font-bold py-1.5 rounded-lg">
+                1,000 🪙
+              </button>
+            </div>
+
+            <div class="bg-cardBg border border-slate-700/80 rounded-2xl p-3.5 flex flex-col justify-between">
+              <div>
+                <span class="text-xl">🔥</span>
+                <h5 class="font-bold text-xs text-white mt-1">Free Fire 110 💎</h5>
+                <p class="text-[10px] text-slate-400">Direct ID Top-Up</p>
+              </div>
+              <button onclick="redeemPreset('Free Fire 110 Diamonds', 1000)" class="ripple mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-yellow-400 text-xs font-bold py-1.5 rounded-lg">
+                1,000 🪙
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 3: STATS & AUDIT LOGS -->
+      <section id="tab-stats" class="space-y-3 hidden transition-opacity duration-200">
+        <div class="bg-cardBg border border-slate-700 rounded-2xl p-4 shadow-xl">
+          <h3 class="font-bold text-sm text-white mb-3 flex items-center">
+            <span class="mr-2">📊</span> Account Overview
+          </h3>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
+              <span class="text-[10px] text-slate-400 uppercase font-bold">Total Earned</span>
+              <p id="totalEarnedStat" class="text-lg font-black text-emerald-400 font-mono mt-0.5">3,450 🪙</p>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
+              <span class="text-[10px] text-slate-400 uppercase font-bold">Total Redeemed</span>
+              <p id="totalRedeemedStat" class="text-lg font-black text-rose-400 font-mono mt-0.5">2,200 🪙</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity History Log -->
+        <div class="bg-cardBg border border-slate-700 rounded-2xl p-4 shadow-xl">
+          <h4 class="font-bold text-xs text-slate-300 uppercase tracking-wider mb-3">Recent Transactions</h4>
+          <div id="transactionLogs" class="space-y-2.5">
+            <!-- Dynamic transactions will render here -->
+            <div class="flex items-center justify-between py-2 border-b border-slate-800 text-xs">
+              <div class="flex items-center space-x-2.5">
+                <span class="text-emerald-400">⚡</span>
+                <div>
+                  <p class="font-bold text-white">Daily Login Reward</p>
+                  <p class="text-[10px] text-slate-400">Today, 09:15 AM</p>
+                </div>
+              </div>
+              <span class="font-bold text-emerald-400 font-mono">+100 🪙</span>
+            </div>
+
+            <div class="flex items-center justify-between py-2 border-b border-slate-800 text-xs">
+              <div class="flex items-center space-x-2.5">
+                <span class="text-rose-400">💸</span>
+                <div>
+                  <p class="font-bold text-white">Paytm UPI Transfer (₹10)</p>
+                  <p class="text-[10px] text-slate-400">Yesterday • SUCCESS</p>
+                </div>
+              </div>
+              <span class="font-bold text-rose-400 font-mono">-1,000 🪙</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION (M3 3-TAB BAR) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 flex justify-center">
+      <div class="w-full max-w-md flex items-center justify-around py-2.5 px-4">
+        
+        <!-- Tab 1: Tasks -->
+        <button onclick="switchTab('tasks')" id="nav-btn-tasks" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-neonCyan">
+          <div class="p-1 rounded-full bg-cyan-500/10">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-bold mt-1 tracking-wider">TASKS</span>
+        </button>
+
+        <!-- Tab 2: Vault (Redeem) -->
+        <button onclick="switchTab('vault')" id="nav-btn-vault" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-slate-400">
+          <div class="p-1 rounded-full">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-bold mt-1 tracking-wider">VAULT</span>
+        </button>
+
+        <!-- Tab 3: Stats -->
+        <button onclick="switchTab('stats')" id="nav-btn-stats" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-slate-400">
+          <div class="p-1 rounded-full">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-bold mt-1 tracking-wider">STATS</span>
+        </button>
+
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- APPLICATION JAVASCRIPT LOGIC -->
+  <script>
+    // App State
+    let userCoins = 1250;
+    let totalEarned = 3450;
+    let totalRedeemed = 2200;
+    let activeTab = 'tasks';
+
+    // DOM Elements
+    const headerCoinsEl = document.getElementById('headerCoins');
+    const calcBalanceLabel = document.getElementById('calcBalanceLabel');
+    const rupeeInput = document.getElementById('rupeeInput');
+    const calculatedCoinsText = document.getElementById('calculatedCoinsText');
+    const estimatedRupeesText = document.getElementById('estimatedRupeesText');
+    const calcErrorBox = document.getElementById('calcErrorBox');
+    const redeemSubmitBtn = document.getElementById('redeemSubmitBtn');
+    const receiverInput = document.getElementById('receiverInput');
+    const transactionLogs = document.getElementById('transactionLogs');
+
+    // Initialize UI
+    updateCoinsDisplay();
+
+    // 1. DYNAMIC JAVASCRIPT CALCULATION FOR VAULT REDEEM (CRITICAL FIX)
+    // Formula: 1 Rupee = 100 Coins (Pure numeric, prevents string concatenation bugs like '1000')
+    rupeeInput.addEventListener('input', function (e) {
+      const rawValue = e.target.value.trim();
+
+      // Reset state if input is empty
+      if (!rawValue) {
+        calculatedCoinsText.innerText = "0 Coins";
+        estimatedRupeesText.innerText = "₹0.00";
+        calcErrorBox.classList.add('hidden');
+        redeemSubmitBtn.disabled = false;
+        return;
+      }
+
+      // Parse pure positive integer
+      const rupees = parseInt(rawValue, 10);
+
+      // Validate numeric integer
+      if (isNaN(rupees) || rupees <= 0) {
+        showCalculationError("Please enter a valid positive rupee amount.");
+        calculatedCoinsText.innerText = "0 Coins";
+        estimatedRupeesText.innerText = "₹0.00";
+        redeemSubmitBtn.disabled = true;
+        return;
+      }
+
+      // Exact mathematical calculation
+      const requiredCoins = rupees * 100;
+
+      // Update UI with calculated numbers
+      calculatedCoinsText.innerText = `${requiredCoins.toLocaleString('en-IN')} Coins`;
+      estimatedRupeesText.innerText = `₹${rupees.toLocaleString('en-IN')}.00`;
+
+      // Balance & Limit Validations
+      if (rupees < 10) {
+        showCalculationError("Minimum withdrawal limit is ₹10 (1,000 Coins).");
+        redeemSubmitBtn.disabled = true;
+      } else if (requiredCoins > userCoins) {
+        const shortBy = requiredCoins - userCoins;
+        showCalculationError(`Insufficient balance! You need ${shortBy.toLocaleString('en-IN')} more coins for this withdrawal.`);
+        redeemSubmitBtn.disabled = true;
+      } else {
+        calcErrorBox.classList.add('hidden');
+        redeemSubmitBtn.disabled = false;
+      }
+    });
+
+    function showCalculationError(message) {
+      calcErrorBox.innerText = `⚠️ ${message}`;
+      calcErrorBox.classList.remove('hidden');
+    }
+
+    // Process Custom Vault Redeem
+    function processRedeem() {
+      const rupees = parseInt(rupeeInput.value.trim(), 10);
+      const receiver = receiverInput.value.trim();
+
+      if (!receiver) {
+        showToast("⚠️ Please enter a valid UPI VPA or Paytm phone number.", "warning");
+        receiverInput.focus();
+        return;
+      }
+
+      if (isNaN(rupees) || rupees < 10) {
+        showToast("⚠️ Minimum withdrawal is ₹10 (1,000 Coins).", "warning");
+        return;
+      }
+
+      const requiredCoins = rupees * 100;
+      if (requiredCoins > userCoins) {
+        showToast("❌ Insufficient coin balance for this transaction.", "error");
+        return;
+      }
+
+      // Deduct Coins
+      userCoins -= requiredCoins;
+      totalRedeemed += requiredCoins;
+      updateCoinsDisplay();
+
+      // Log Transaction
+      addTransactionLog(`Paytm/UPI ₹${rupees} Payout (${receiver})`, -requiredCoins, "PENDING");
+
+      // Reset Input
+      rupeeInput.value = '';
+      calculatedCoinsText.innerText = "0 Coins";
+      estimatedRupeesText.innerText = "₹0.00";
+      calcErrorBox.classList.add('hidden');
+
+      showToast(`🎉 Withdrawal of ₹${rupees} submitted! Ref ID: PAY-${Date.now().toString().slice(-6)}`, "success");
+    }
+
+    // Process Fixed Preset Cards
+    function redeemPreset(title, coins) {
+      if (userCoins < coins) {
+        showToast(`❌ Insufficient Coins! You need ${coins - userCoins} more coins.`, "error");
+        return;
+      }
+
+      userCoins -= coins;
+      totalRedeemed += coins;
+      updateCoinsDisplay();
+
+      addTransactionLog(`Redeemed ${title}`, -coins, "DELIVERED");
+      showToast(`🎁 Successfully redeemed ${title}! Code sent to email.`, "success");
+    }
+
+    // Claim Task Offer
+    function claimTask(taskTitle, reward) {
+      userCoins += reward;
+      totalEarned += reward;
+      updateCoinsDisplay();
+
+      addTransactionLog(`Completed: ${taskTitle}`, reward, "CREDITED");
+      showToast(`⚡ +${reward} Coins credited for completing ${taskTitle}!`, "success");
+    }
+
+    // Update Coin Displays
+    function updateCoinsDisplay() {
+      const formatted = userCoins.toLocaleString('en-IN');
+      headerCoinsEl.innerText = formatted;
+      calcBalanceLabel.innerText = formatted;
+      document.getElementById('totalEarnedStat').innerText = `${totalEarned.toLocaleString('en-IN')} 🪙`;
+      document.getElementById('totalRedeemedStat').innerText = `${totalRedeemed.toLocaleString('en-IN')} 🪙`;
+    }
+
+    // Add Audit Log
+    function addTransactionLog(title, coins, status) {
+      const isPositive = coins > 0;
+      const row = document.createElement('div');
+      row.className = "flex items-center justify-between py-2 border-b border-slate-800 text-xs animate-fadeIn";
+      row.innerHTML = `
+        <div class="flex items-center space-x-2.5">
+          <span class="${isPositive ? 'text-emerald-400' : 'text-rose-400'}">${isPositive ? '⚡' : '💸'}</span>
+          <div>
+            <p class="font-bold text-white">${title}</p>
+            <p class="text-[10px] text-slate-400">Just now • ${status}</p>
+          </div>
+        </div>
+        <span class="font-bold ${isPositive ? 'text-emerald-400' : 'text-rose-400'} font-mono">${isPositive ? '+' : ''}${coins.toLocaleString('en-IN')} 🪙</span>
+      `;
+      transactionLogs.prepend(row);
+    }
+
+    // 2. BOTTOM NAVIGATION SWITCHING
+    function switchTab(tabId) {
+      activeTab = tabId;
+      const tabs = ['tasks', 'vault', 'stats'];
+
+      tabs.forEach(t => {
+        const screen = document.getElementById(`tab-${t}`);
+        const btn = document.getElementById(`nav-btn-${t}`);
+        const iconWrap = btn.querySelector('div');
+
+        if (t === tabId) {
+          screen.classList.remove('hidden');
+          btn.classList.remove('text-slate-400');
+          btn.classList.add('text-neonCyan');
+          iconWrap.classList.add('bg-cyan-500/10');
+        } else {
+          screen.classList.add('hidden');
+          btn.classList.remove('text-neonCyan');
+          btn.classList.add('text-slate-400');
+          iconWrap.classList.remove('bg-cyan-500/10');
+        }
+      });
+    }
+
+    // Logout Action
+    function handleLogout() {
+      if (confirm("Are you sure you want to sign out from AIMedia Gamer?")) {
+        showToast("👋 Signed out successfully. Redirecting...", "info");
+        setTimeout(() => {
+          userCoins = 0;
+          updateCoinsDisplay();
+          location.reload();
+        }, 1200);
+      }
+    }
+
+    // Toast Notification System
+    let toastTimeout;
+    function showToast(message, type = "success") {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMsg.innerText = message;
+      if (type === 'error') toastIcon.innerText = "❌";
+      else if (type === 'warning') toastIcon.innerText = "⚠️";
+      else if (type === 'info') toastIcon.innerText = "ℹ️";
+      else toastIcon.innerText = "✨";
+
+      clearTimeout(toastTimeout);
+      toast.classList.remove('-translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('-translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

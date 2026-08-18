@@ -72,11 +72,14 @@ fun TasksScreen(
     onCustomRedeem: ((Int, Int) -> Unit)? = null,
     onUnlockSalary: (() -> Unit)? = null,
     onRefreshTasks: (() -> Unit)? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    // NEW: controlled by ViewModel via uiState.showAllTasks
+    showAll: Boolean = false,
+    // NEW: callback to toggle showAll (wire up to viewModel.toggleShowAllTasks())
+    onToggleShowAll: () -> Unit = {}
 ) {
     var selectedFilter by remember { mutableStateOf<TaskType?>(null) }
     var searchQuery by remember { mutableStateOf("") }
-    var showAllTasks by remember { mutableStateOf(false) }
 
     val filteredTasks = remember(tasks, selectedFilter, searchQuery) {
         tasks.filter { task ->
@@ -89,7 +92,7 @@ fun TasksScreen(
         }
     }
 
-    val displayedTasks = if (showAllTasks || searchQuery.isNotBlank() || selectedFilter != null) {
+    val displayedTasks = if (showAll || searchQuery.isNotBlank() || selectedFilter != null) {
         filteredTasks
     } else {
         filteredTasks.take(5)
@@ -240,7 +243,7 @@ fun TasksScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = if (showAllTasks || searchQuery.isNotBlank() || selectedFilter != null) {
+                        text = if (showAll || searchQuery.isNotBlank() || selectedFilter != null) {
                             "ALL MISSIONS (${filteredTasks.size})"
                         } else {
                             "FEATURED MISSIONS (${displayedTasks.size}/${filteredTasks.size})"
@@ -272,13 +275,13 @@ fun TasksScreen(
                         Spacer(modifier = Modifier.width(6.dp))
                     }
                     Text(
-                        text = if (showAllTasks || searchQuery.isNotBlank() || selectedFilter != null) "Show Featured (5)" else "View All (${filteredTasks.size})",
+                        text = if (showAll || searchQuery.isNotBlank() || selectedFilter != null) "Show Featured (5)" else "View All (${filteredTasks.size})",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = NeonCyan,
                         modifier = Modifier
                             .clip(RoundedCornerShape(6.dp))
-                            .clickable { showAllTasks = !showAllTasks }
+                            .clickable { onToggleShowAll() }
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     )
                 }
@@ -473,209 +476,3 @@ fun TasksScreen(
         }
     }
 }
-
-@Composable
-private fun FilterChip(
-    title: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(999.dp))
-            .background(if (isSelected) NeonCyan else Color(0x1AFFFFFF))
-            .border(
-                width = 1.dp,
-                color = if (isSelected) NeonCyan else Color(0x1AFFFFFF),
-                shape = RoundedCornerShape(999.dp)
-            )
-            .clickable { onClick() }
-            .padding(horizontal = 14.dp, vertical = 7.dp)
-    ) {
-        Text(
-            text = title,
-            fontSize = 12.sp,
-            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-            color = if (isSelected) Color.Black else CyberTextPrimary
-        )
-    }
-}
-
-@Composable
-private fun TaskCard(
-    task: TaskOffer,
-    onClick: () -> Unit
-) {
-    GlassmorphismCard(
-        onClick = onClick,
-        glowGradient = task.isHot,
-        cornerShape = RoundedCornerShape(20.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(1f)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(Color(0xCC1E293B))
-                        .border(width = 1.dp, color = Color(0x1AFFFFFF), shape = RoundedCornerShape(16.dp)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(text = task.iconEmoji, fontSize = 22.sp)
-                }
-
-                Spacer(modifier = Modifier.width(12.dp))
-
-                Column {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = task.title,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = CyberTextPrimary
-                        )
-                        if (task.isHot) {
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text(
-                                text = "HOT",
-                                fontSize = 9.sp,
-                                fontWeight = FontWeight.Black,
-                                color = NeonPink,
-                                modifier = Modifier
-                                    .background(Color(0x33FF2D95), shape = RoundedCornerShape(4.dp))
-                                    .padding(horizontal = 4.dp, vertical = 2.dp)
-                            )
-                        }
-                    }
-                    Text(
-                        text = task.description,
-                        fontSize = 11.sp,
-                        color = CyberTextSecondary
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(Color(0x1A7EFFA3))
-                    .border(width = 1.dp, color = Color(0x4D7EFFA3), shape = RoundedCornerShape(10.dp))
-                    .padding(horizontal = 12.dp, vertical = 6.dp)
-            ) {
-                Text(
-                    text = "+${task.coinReward}",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = NeonLime
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun WithdrawRewardCard(
-    reward: RedeemReward,
-    onRedeem: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(24.dp))
-            .background(
-                Brush.linearGradient(
-                    colors = listOf(Color(0xFF1A1A2E), Color(0xFF06060B))
-                )
-            )
-            .border(width = 1.dp, color = Color(0x4DFF2D95), shape = RoundedCornerShape(24.dp))
-            .padding(18.dp)
-    ) {
-        Column {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top
-            ) {
-                Column {
-                    Text(
-                        text = "STORE SPECIAL",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = NeonPink,
-                        letterSpacing = 1.sp
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = reward.title,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                    Text(
-                        text = "Instant Delivery",
-                        fontSize = 11.sp,
-                        fontStyle = FontStyle.Italic,
-                        color = Color(0x99FFFFFF)
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(Color(0x66000000))
-                        .border(width = 1.dp, color = Color(0x0DFFFFFF), shape = CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(text = "🎁", fontSize = 18.sp)
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Bottom
-            ) {
-                Column {
-                    Text(
-                        text = "REQUIREMENT",
-                        fontSize = 9.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0x66FFFFFF)
-                    )
-                    Text(
-                        text = "%,d Coins".format(reward.coinsRequired),
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = NeonLime
-                    )
-                }
-
-                Button(
-                    onClick = onRedeem,
-                    colors = ButtonDefaults.buttonColors(containerColor = NeonPink),
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Text(
-                        text = "REDEEM NOW",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Black,
-                        color = Color.White,
-                        letterSpacing = (-0.5).sp
-                    )
-                }
-            }
-        }
-    }
-}
-

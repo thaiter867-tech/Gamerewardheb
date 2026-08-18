@@ -25,7 +25,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-// Updated UI state now includes showAllTasks so the Tasks screen can be controlled from the ViewModel
+// UI state for the app; includes showAllTasks to control the Tasks UI
 data class RewardUiState(
     val currentTab: AppTab = AppTab.TASKS,
     val isLoading: Boolean = true,
@@ -40,7 +40,7 @@ data class RewardUiState(
     val isPostbackSimulating: Boolean = false,
     val messageToast: String? = null,
     val recentRedeemedCode: String? = null,
-    // NEW: whether Tasks screen is in "show all" mode
+    // NEW flag to control the TasksScreen "View All" behavior
     val showAllTasks: Boolean = false
 )
 
@@ -218,7 +218,7 @@ class RewardViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    // Update current tab; reset showAllTasks when switching away from Tasks to avoid stale UI state
+    // Select top-level tab and reset showAllTasks when switching away from TASKS
     fun selectTab(tab: AppTab) {
         _uiState.update { state ->
             state.copy(currentTab = tab, showAllTasks = if (tab == AppTab.TASKS) state.showAllTasks else false)

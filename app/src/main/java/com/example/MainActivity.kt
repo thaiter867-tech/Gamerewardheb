@@ -165,7 +165,10 @@ fun GameRewardHubApp(viewModel: RewardViewModel) {
                                 onRedeemClick = { viewModel.openRedeemDialog(it) },
                                 onCustomRedeem = { rupees, coins -> viewModel.redeemCustomVault(rupees, coins) },
                                 onUnlockSalary = { viewModel.unlockMonthlySalary() },
-                                onRefreshTasks = { viewModel.refreshTasks() }
+                                onRefreshTasks = { viewModel.refreshTasks() },
+                                // wire TasksScreen's View All to ViewModel state
+                                showAll = uiState.showAllTasks,
+                                onToggleShowAll = { viewModel.toggleShowAllTasks() }
                             )
                             AppTab.DASHBOARD -> DashboardScreen(
                                 user = uiState.user

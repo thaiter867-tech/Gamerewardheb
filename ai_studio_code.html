@@ -54,7 +54,7 @@
     }
   </style>
 </head>
-<body class="bg-darkSlate font-sans min-h-screen flex flex-col items-center justify-between pb-24 selection:bg-neonCyan selection:text-black">
+<body class="bg-darkSlate font-sans min-h-screen flex flex-col items-center justify-between pb-28 selection:bg-neonCyan selection:text-black">
 
   <!-- Mobile Max Container Wrapper -->
   <div class="w-full max-w-md min-h-screen flex flex-col justify-between px-4 pt-4 pb-2">
@@ -89,48 +89,6 @@
 
     <!-- MAIN SCROLLABLE CONTENT AREA -->
     <main class="flex-1 overflow-y-auto custom-scrollbar pb-6">
-
-      <!-- USER PROFILE CARD -->
-      <section class="bg-cardBg border border-slate-700/80 rounded-2xl p-4 shadow-xl mb-4 relative overflow-hidden">
-        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neonCyan/10 rounded-full blur-xl pointer-events-none"></div>
-        
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3.5">
-            <!-- Profile Avatar with Online Ring -->
-            <div class="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" 
-                alt="Avatar" 
-                class="w-13 h-13 w-12 h-12 rounded-2xl object-cover border-2 border-neonCyan shadow-md"
-              />
-              <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
-            </div>
-
-            <!-- User Info & Verified Badge -->
-            <div>
-              <div class="flex items-center space-x-1.5">
-                <h2 class="font-bold text-sm text-white tracking-wide">AIMedia Gamer</h2>
-                <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/40">
-                  <svg class="w-2.5 h-2.5 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                  Verified
-                </span>
-              </div>
-              <p class="text-xs text-slate-400 font-medium">aimeedia.tech@gmail.com</p>
-              <p class="text-[10px] text-slate-500 font-mono mt-0.5">UID: GRH-98214-IN</p>
-            </div>
-          </div>
-
-          <!-- Logout Button -->
-          <button onclick="handleLogout()" class="ripple flex flex-col items-center justify-center p-2 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-slate-700 transition">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            <span class="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Exit</span>
-          </button>
-        </div>
-      </section>
 
       <!-- TAB 1: TASKS SCREEN -->
       <section id="tab-tasks" class="space-y-3 transition-opacity duration-200">
@@ -185,7 +143,7 @@
         </div>
       </section>
 
-      <!-- TAB 2: VAULT / REDEEM SECTION (CRITICAL FIX) -->
+      <!-- TAB 2: VAULT / REDEEM SECTION -->
       <section id="tab-vault" class="space-y-4 hidden transition-opacity duration-200">
         
         <!-- Payout Banner Card -->
@@ -231,7 +189,7 @@
             />
           </div>
 
-          <!-- Rupee Amount Input (Pure Numeric Dynamic Calculation) -->
+          <!-- Rupee Amount Input -->
           <div>
             <div class="flex justify-between items-center mb-1.5">
               <label class="text-[11px] font-bold text-slate-400 uppercase">Withdraw Amount (in Rupees ₹)</label>
@@ -308,14 +266,14 @@
 
       </section>
 
-      <!-- TAB 3: STATS & AUDIT LOGS -->
-      <section id="tab-stats" class="space-y-3 hidden transition-opacity duration-200">
+      <!-- TAB 3: HISTORY SECTION -->
+      <section id="tab-history" class="space-y-3 hidden transition-opacity duration-200">
         <div class="bg-cardBg border border-slate-700 rounded-2xl p-4 shadow-xl">
-          <h3 class="font-bold text-sm text-white mb-3 flex items-center">
-            <span class="mr-2">📊</span> Account Overview
+          <h3 class="font-bold text-sm text-white mb-4 flex items-center">
+            <span class="mr-2">📊</span> Account Stats
           </h3>
 
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-2 gap-3 mb-6">
             <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
               <span class="text-[10px] text-slate-400 uppercase font-bold">Total Earned</span>
               <p id="totalEarnedStat" class="text-lg font-black text-emerald-400 font-mono mt-0.5">3,450 🪙</p>
@@ -357,11 +315,91 @@
         </div>
       </section>
 
+      <!-- TAB 4: PROFILE SECTION -->
+      <section id="tab-profile" class="space-y-4 hidden transition-opacity duration-200">
+        
+        <!-- USER PROFILE CARD -->
+        <div class="bg-cardBg border border-slate-700/80 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+          <div class="absolute -right-8 -top-8 w-24 h-24 bg-neonCyan/10 rounded-full blur-xl pointer-events-none"></div>
+          
+          <div class="flex items-center space-x-4 mb-6">
+            <!-- Profile Avatar with Online Ring -->
+            <div class="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" 
+                alt="Avatar" 
+                class="w-20 h-20 rounded-2xl object-cover border-2 border-neonCyan shadow-md"
+              />
+              <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+            </div>
+
+            <!-- User Info -->
+            <div>
+              <div class="flex items-center space-x-2 mb-1">
+                <h2 class="font-bold text-sm text-white tracking-wide">AIMedia Gamer</h2>
+                <span class="inline-flex items-center px-2 py-1 rounded-full text-[8px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/40">✓ Verified</span>
+              </div>
+              <p class="text-xs text-slate-400 font-medium">aimeedia.tech@gmail.com</p>
+              <p class="text-[10px] text-slate-500 font-mono mt-1">UID: GRH-98214-IN</p>
+            </div>
+          </div>
+
+          <!-- Profile Stats -->
+          <div class="space-y-2 border-t border-slate-700 pt-4">
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-slate-400">Account Status</span>
+              <span class="text-xs font-bold text-emerald-400">🟢 Active</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-slate-400">Member Since</span>
+              <span class="text-xs font-bold text-neonCyan">Aug 18, 2026</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-slate-400">Withdrawal Status</span>
+              <span class="text-xs font-bold text-yellow-400">Available on 20th</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-slate-400">Account Tier</span>
+              <span class="text-xs font-bold text-neonPink">Premium</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SETTINGS SECTION -->
+        <div class="bg-cardBg border border-slate-700 rounded-2xl p-4 shadow-xl">
+          <h4 class="font-bold text-sm text-white mb-3">⚙️ Settings</h4>
+          
+          <button onclick="handleLogout()" class="ripple w-full flex items-center justify-between p-3 bg-slate-800/50 hover:bg-rose-500/10 border border-slate-700 rounded-xl transition mb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🚪</span>
+              <span class="text-xs font-bold text-white">Logout</span>
+            </div>
+            <span class="text-lg">→</span>
+          </button>
+
+          <button onclick="showToast('🔐 Password update coming soon!', 'info')" class="ripple w-full flex items-center justify-between p-3 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 rounded-xl transition">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🔒</span>
+              <span class="text-xs font-bold text-white">Change Password</span>
+            </div>
+            <span class="text-lg">→</span>
+          </button>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div class="bg-cardBg border border-slate-700 rounded-2xl p-4 shadow-xl text-center">
+          <p class="text-[10px] text-slate-400">GAMEREWARD HUB v2.0</p>
+          <p class="text-[9px] text-slate-500 mt-1">© 2026 All Rights Reserved</p>
+          <p class="text-[9px] text-slate-600 mt-2">Terms • Privacy • Support</p>
+        </div>
+
+      </section>
+
     </main>
 
-    <!-- BOTTOM NAVIGATION (M3 3-TAB BAR) -->
+    <!-- BOTTOM NAVIGATION (4-TAB BAR) -->
     <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 flex justify-center">
-      <div class="w-full max-w-md flex items-center justify-around py-2.5 px-4">
+      <div class="w-full max-w-md flex items-center justify-around py-2.5 px-2">
         
         <!-- Tab 1: Tasks -->
         <button onclick="switchTab('tasks')" id="nav-btn-tasks" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-neonCyan">
@@ -371,27 +409,37 @@
               <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" fill-rule="evenodd" />
             </svg>
           </div>
-          <span class="text-[10px] font-bold mt-1 tracking-wider">TASKS</span>
+          <span class="text-[9px] font-bold mt-1 tracking-wider">TASKS</span>
         </button>
 
-        <!-- Tab 2: Vault (Redeem) -->
+        <!-- Tab 2: Vault (Wallet) -->
         <button onclick="switchTab('vault')" id="nav-btn-vault" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-slate-400">
           <div class="p-1 rounded-full">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
             </svg>
           </div>
-          <span class="text-[10px] font-bold mt-1 tracking-wider">VAULT</span>
+          <span class="text-[9px] font-bold mt-1 tracking-wider">WALLET</span>
         </button>
 
-        <!-- Tab 3: Stats -->
-        <button onclick="switchTab('stats')" id="nav-btn-stats" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-slate-400">
+        <!-- Tab 3: History -->
+        <button onclick="switchTab('history')" id="nav-btn-history" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-slate-400">
           <div class="p-1 rounded-full">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
             </svg>
           </div>
-          <span class="text-[10px] font-bold mt-1 tracking-wider">STATS</span>
+          <span class="text-[9px] font-bold mt-1 tracking-wider">HISTORY</span>
+        </button>
+
+        <!-- Tab 4: Profile -->
+        <button onclick="switchTab('profile')" id="nav-btn-profile" class="ripple flex flex-col items-center justify-center flex-1 py-1 text-slate-400">
+          <div class="p-1 rounded-full">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <span class="text-[9px] font-bold mt-1 tracking-wider">PROFILE</span>
         </button>
 
       </div>
@@ -421,12 +469,10 @@
     // Initialize UI
     updateCoinsDisplay();
 
-    // 1. DYNAMIC JAVASCRIPT CALCULATION FOR VAULT REDEEM (CRITICAL FIX)
-    // Formula: 1 Rupee = 100 Coins (Pure numeric, prevents string concatenation bugs like '1000')
+    // DYNAMIC CALCULATION FOR VAULT REDEEM
     rupeeInput.addEventListener('input', function (e) {
       const rawValue = e.target.value.trim();
 
-      // Reset state if input is empty
       if (!rawValue) {
         calculatedCoinsText.innerText = "0 Coins";
         estimatedRupeesText.innerText = "₹0.00";
@@ -435,10 +481,8 @@
         return;
       }
 
-      // Parse pure positive integer
       const rupees = parseInt(rawValue, 10);
 
-      // Validate numeric integer
       if (isNaN(rupees) || rupees <= 0) {
         showCalculationError("Please enter a valid positive rupee amount.");
         calculatedCoinsText.innerText = "0 Coins";
@@ -447,14 +491,11 @@
         return;
       }
 
-      // Exact mathematical calculation
       const requiredCoins = rupees * 100;
 
-      // Update UI with calculated numbers
       calculatedCoinsText.innerText = `${requiredCoins.toLocaleString('en-IN')} Coins`;
       estimatedRupeesText.innerText = `₹${rupees.toLocaleString('en-IN')}.00`;
 
-      // Balance & Limit Validations
       if (rupees < 10) {
         showCalculationError("Minimum withdrawal limit is ₹10 (1,000 Coins).");
         redeemSubmitBtn.disabled = true;
@@ -473,13 +514,12 @@
       calcErrorBox.classList.remove('hidden');
     }
 
-    // Process Custom Vault Redeem - FIXED VERSION WITH BETTER VALIDATION
+    // Process Custom Vault Redeem
     function processRedeem() {
       const rupees = parseInt(rupeeInput.value.trim(), 10);
       const receiver = receiverInput.value.trim();
       const payoutType = document.querySelector('input[name="payoutType"]:checked').value;
 
-      // Input Validations
       if (!receiver) {
         showToast("⚠️ Please enter a valid UPI VPA or Paytm phone number.", "warning");
         receiverInput.focus();
@@ -504,15 +544,12 @@
         return;
       }
 
-      // ALL VALIDATIONS PASSED - Process Withdrawal
       userCoins -= requiredCoins;
       totalRedeemed += requiredCoins;
       updateCoinsDisplay();
 
-      // Log Transaction
       addTransactionLog(`${payoutType} ₹${rupees} Payout (${receiver})`, -requiredCoins, "PENDING");
 
-      // Reset Form
       rupeeInput.value = '';
       receiverInput.value = '';
       calculatedCoinsText.innerText = "0 Coins";
@@ -561,7 +598,7 @@
     function addTransactionLog(title, coins, status) {
       const isPositive = coins > 0;
       const row = document.createElement('div');
-      row.className = "flex items-center justify-between py-2 border-b border-slate-800 text-xs animate-fadeIn";
+      row.className = "flex items-center justify-between py-2 border-b border-slate-800 text-xs";
       row.innerHTML = `
         <div class="flex items-center space-x-2.5">
           <span class="${isPositive ? 'text-emerald-400' : 'text-rose-400'}">${isPositive ? '⚡' : '💸'}</span>
@@ -575,10 +612,10 @@
       transactionLogs.prepend(row);
     }
 
-    // 2. BOTTOM NAVIGATION SWITCHING
+    // BOTTOM NAVIGATION SWITCHING
     function switchTab(tabId) {
       activeTab = tabId;
-      const tabs = ['tasks', 'vault', 'stats'];
+      const tabs = ['tasks', 'vault', 'history', 'profile'];
 
       tabs.forEach(t => {
         const screen = document.getElementById(`tab-${t}`);

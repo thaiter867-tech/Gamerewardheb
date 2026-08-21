@@ -82,7 +82,7 @@
     </header>
 
     <!-- TOAST NOTIFICATION CONTAINER -->
-    <div id="toast" class="fixed top-5 z-50 left-1/2 -translate-x-1/2 w-11/12 max-w-sm bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-2xl shadow-2xl transition-all duration-300 transform -translate-y-24 opacity-0 pointer-events-none flex items-center space-x-3">
+    <div id="toast" class="fixed top-5 z-50 left-1/2 -translate-x-1/2 w-11/12 max-w-sm bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-2xl shadow-2xl transition-all duration-300 -translate-y-24 opacity-0 flex items-center gap-2">
       <span id="toastIcon" class="text-xl">✨</span>
       <span id="toastMessage" class="text-xs font-semibold leading-tight">Notification text</span>
     </div>
@@ -112,7 +112,7 @@
                 <h2 class="font-bold text-sm text-white tracking-wide">AIMedia Gamer</h2>
                 <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/40">
                   <svg class="w-2.5 h-2.5 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   Verified
                 </span>
@@ -123,7 +123,7 @@
           </div>
 
           <!-- Logout Button -->
-          <button onclick="handleLogout()" class="ripple flex flex-col items-center justify-center p-2 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-slate-700/60 transition">
+          <button onclick="handleLogout()" class="ripple flex flex-col items-center justify-center p-2 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-slate-700 transition">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
@@ -149,7 +149,7 @@
               <span class="text-[10px] text-emerald-400 font-semibold mt-0.5 inline-block">⚡ 1 min completion</span>
             </div>
           </div>
-          <button onclick="claimTask('Dream11', 500)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+          <button onclick="claimTask('Dream11', 500)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/30 transition hover:shadow-emerald-500/50">
             +500 🪙
           </button>
         </div>
@@ -164,7 +164,7 @@
               <span class="text-[10px] text-emerald-400 font-semibold mt-0.5 inline-block">⚡ Verified offer</span>
             </div>
           </div>
-          <button onclick="claimTask('WinZO Games', 350)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+          <button onclick="claimTask('WinZO Games', 350)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/30 transition hover:shadow-emerald-500/50">
             +350 🪙
           </button>
         </div>
@@ -179,7 +179,7 @@
               <span class="text-[10px] text-emerald-400 font-semibold mt-0.5 inline-block">⚡ High payout</span>
             </div>
           </div>
-          <button onclick="claimTask('Zupee Ludo', 400)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/20 whitespace-nowrap">
+          <button onclick="claimTask('Zupee Ludo', 400)" class="ripple bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-emerald-500/30 transition hover:shadow-emerald-500/50">
             +400 🪙
           </button>
         </div>
@@ -288,7 +288,7 @@
                 <h5 class="font-bold text-xs text-white mt-1">Google Play ₹10</h5>
                 <p class="text-[10px] text-slate-400">Instant Redeem Code</p>
               </div>
-              <button onclick="redeemPreset('Google Play ₹10', 1000)" class="ripple mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-yellow-400 text-xs font-bold py-1.5 rounded-lg">
+              <button onclick="redeemPreset('Google Play ₹10', 1000)" class="ripple mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-yellow-400 text-xs font-bold py-1.5 rounded-lg transition">
                 1,000 🪙
               </button>
             </div>
@@ -299,7 +299,7 @@
                 <h5 class="font-bold text-xs text-white mt-1">Free Fire 110 💎</h5>
                 <p class="text-[10px] text-slate-400">Direct ID Top-Up</p>
               </div>
-              <button onclick="redeemPreset('Free Fire 110 Diamonds', 1000)" class="ripple mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-yellow-400 text-xs font-bold py-1.5 rounded-lg">
+              <button onclick="redeemPreset('Free Fire 110 Diamonds', 1000)" class="ripple mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-yellow-400 text-xs font-bold py-1.5 rounded-lg transition">
                 1,000 🪙
               </button>
             </div>
@@ -368,7 +368,7 @@
           <div class="p-1 rounded-full bg-cyan-500/10">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" fill-rule="evenodd" />
             </svg>
           </div>
           <span class="text-[10px] font-bold mt-1 tracking-wider">TASKS</span>
@@ -473,43 +473,54 @@
       calcErrorBox.classList.remove('hidden');
     }
 
-    // Process Custom Vault Redeem
+    // Process Custom Vault Redeem - FIXED VERSION WITH BETTER VALIDATION
     function processRedeem() {
       const rupees = parseInt(rupeeInput.value.trim(), 10);
       const receiver = receiverInput.value.trim();
+      const payoutType = document.querySelector('input[name="payoutType"]:checked').value;
 
+      // Input Validations
       if (!receiver) {
         showToast("⚠️ Please enter a valid UPI VPA or Paytm phone number.", "warning");
         receiverInput.focus();
         return;
       }
 
-      if (isNaN(rupees) || rupees < 10) {
+      if (isNaN(rupees) || rupees <= 0) {
+        showToast("⚠️ Please enter a valid rupee amount.", "warning");
+        rupeeInput.focus();
+        return;
+      }
+
+      if (rupees < 10) {
         showToast("⚠️ Minimum withdrawal is ₹10 (1,000 Coins).", "warning");
         return;
       }
 
       const requiredCoins = rupees * 100;
+      
       if (requiredCoins > userCoins) {
         showToast("❌ Insufficient coin balance for this transaction.", "error");
         return;
       }
 
-      // Deduct Coins
+      // ALL VALIDATIONS PASSED - Process Withdrawal
       userCoins -= requiredCoins;
       totalRedeemed += requiredCoins;
       updateCoinsDisplay();
 
       // Log Transaction
-      addTransactionLog(`Paytm/UPI ₹${rupees} Payout (${receiver})`, -requiredCoins, "PENDING");
+      addTransactionLog(`${payoutType} ₹${rupees} Payout (${receiver})`, -requiredCoins, "PENDING");
 
-      // Reset Input
+      // Reset Form
       rupeeInput.value = '';
+      receiverInput.value = '';
       calculatedCoinsText.innerText = "0 Coins";
       estimatedRupeesText.innerText = "₹0.00";
       calcErrorBox.classList.add('hidden');
+      redeemSubmitBtn.disabled = false;
 
-      showToast(`🎉 Withdrawal of ₹${rupees} submitted! Ref ID: PAY-${Date.now().toString().slice(-6)}`, "success");
+      showToast(`🎉 Withdrawal of ₹${rupees} submitted! Processing...`, "success");
     }
 
     // Process Fixed Preset Cards
@@ -559,7 +570,7 @@
             <p class="text-[10px] text-slate-400">Just now • ${status}</p>
           </div>
         </div>
-        <span class="font-bold ${isPositive ? 'text-emerald-400' : 'text-rose-400'} font-mono">${isPositive ? '+' : ''}${coins.toLocaleString('en-IN')} 🪙</span>
+        <span class="font-bold ${isPositive ? 'text-emerald-400' : 'text-rose-400'} font-mono">${isPositive ? '+' : ''}${Math.abs(coins).toLocaleString('en-IN')} 🪙</span>
       `;
       transactionLogs.prepend(row);
     }
